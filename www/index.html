@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" name="viewport">
+                <title>
+                </title>
+                <link href="manifest.json" rel="manifest">
+                    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+                    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+                        <link href="css/style.css" rel="stylesheet">
+                            <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+                            <!-- ionic/angularjs js -->
+                            <script src="lib/ionic/js/ionic.bundle.js"></script>
+                            <script src="lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
+                            <script src="lib/moment/moment.js"></script>
+                            <script src="lib/angular-moment/angular-moment.js"></script>"></script>
+                            <!-- cordova script (this will be a 404 during development) -->
+                            <script src="cordova.js">
+                            </script>
+                            <!-- your app's js -->
+                            <script src="js/app.js">
+                            </script>
+                        </link>
+                    </link>
+                </link>
+            </meta>
+        </meta>
+    </head>
+    <body ng-app="todo" ng-controller="TodoCtrl" ng-init="getalarms()">
+        <ion-pane>
+            <ion-header-bar class="bar-stable">
+                <h1 class="title">
+                    Alarm
+                </h1>
+                <button class="button button-icon" ng-click="newalarm2()">
+                    <i class="ion-compose">
+                    </i>
+                </button>
+            </ion-header-bar>
+            <ion-content>
+                <ul class="list">
+                    <li class="item" ng-repeat="alarm in alarms track by $index">
+                        {{alarm.time}}
+                        <span class="item-toggle">
+                            <label class="toggle toggle-balanced">
+                                <input ng-click="offalarm($index)" ng-model="alarm.on" type="checkbox">
+                                    <div class="track">
+                                        <div class="handle">
+                                        </div>
+                                    </div>
+                                </input>
+                            </label>
+                        </span>
+                        <a ng-click="removealarm($index)">
+                            <i class="icon ion-close">
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </ion-content>
+        </ion-pane>
+    </body>
+</html>
+<script id="add-alarm.html" type="text/ng-template">
+    <div class="modal">
+     <ion-header-bar class="bar-secondary">
+        <h1 class="title">Set Alarm</h1>
+        <button class="button button-clear button-positive" ng-click="closesetalarm()">Close</button>
+     </ion-header-bar>
+     <ion-content>
+        <form ng-submit="createalarm(alarm)">
+        <div class="list">
+         <label class="item item-input item-select">
+          <div class="input-label">
+             Hour
+          </div>
+          <select ng-model="alarm.hour">
+            <option>01</option><option>02</option><option>03</option><option>04</option>
+            <option>05</option><option>06</option><option>07</option><option>08</option>
+            <option>09</option><option>10</option><option>11</option><option>12</option>
+          </select>
+         </label>
+         <label class="item item-input item-select">
+          <div class="input-label">
+             Min
+          </div>
+          <select ng-model="alarm.min">
+            <option>00</option><option>01</option><option>02</option><option>03</option>
+            <option>04</option><option>05</option><option>06</option><option>07</option>
+            <option>08</option><option>09</option><option>10</option><option>11</option>
+            <option>12</option><option>13</option><option>14</option><option>15</option>
+            <option>16</option><option>17</option><option>18</option><option>19</option>
+            <option>20</option><option>21</option><option>22</option><option>23</option>
+            <option>24</option><option>25</option><option>26</option><option>27</option>
+            <option>28</option><option>29</option><option>30</option><option>31</option>
+            <option>32</option><option>33</option><option>34</option><option>35</option>
+            <option>36</option><option>37</option><option>38</option><option>39</option>
+            <option>40</option><option>41</option><option>42</option><option>43</option>
+            <option>44</option><option>45</option><option>46</option><option>47</option>
+            <option>48</option><option>49</option><option>50</option><option>51</option>
+            <option>52</option><option>53</option><option>54</option><option>55</option>
+            <option>56</option><option>57</option><option>58</option><option>59</option>
+          </select>
+         </label>
+         <label class="item item-input item-select">
+          <div class="input-label">
+             AM / PM
+          </div>
+         <select ng-model="alarm.pos">
+           <option>AM </option>
+           <option>PM </option>
+         </select>
+         </label>
+        </div>
+        <div class="padding">
+           <button type="submit" class="button button-block botton-positive">Create Alarm</button>
+        </div>
+      </form>
+      </ion-content>
+      </div>
+</script>
